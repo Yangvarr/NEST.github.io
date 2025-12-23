@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прайс-лист | Игорь Хазиев</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #3b82f6;
+        }
+        
+        .name {
+            font-size: 3.2em;
+            font-weight: 800;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .tagline {
+            font-size: 1.3em;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+        }
+        
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tech-tag {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            color: #3b82f6;
+            margin-bottom: 30px;
+            padding-left: 15px;
+            border-left: 5px solid #3b82f6;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .service-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: #3b82f6;
+        }
+        
+        .service-name {
+            font-size: 1.4em;
+            color: #f1f5f9;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-name::before {
+            content: "▶";
+            color: #3b82f6;
+            font-size: 0.9em;
+        }
+        
+        .service-stack {
+            color: #60a5fa;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            padding: 5px 0;
+        }
+        
+        .service-desc {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+        
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #334155;
+        }
+        
+        .service-time {
+            color: #94a3b8;
+            font-size: 0.9em;
+        }
+        
+        .service-price {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #10b981;
+        }
+        
+        .conditions {
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 50px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .conditions-title {
+            color: #3b82f6;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .conditions-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .condition-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .condition-icon {
+            color: #10b981;
+            font-size: 1.2em;
+            margin-top: 3px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+        
+        .contacts {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            background: #1e293b;
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        
+        .note {
+            font-size: 0.9em;
+            color: #64748b;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .name {
+                font-size: 2.5em;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-stack {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="name">Игорь Хазиев</h1>
+            <p class="tagline">От идеи до реализации: создаю приложения, игры, ботов и автоматизирую процессы. Полный цикл разработки из одних рук.</p>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">3D Art</span>
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">Flet</span>
+                <span class="tech-tag">Telegram Bots</span>
+                <span class="tech-tag">Автоматизация</span>
+            </div>
+            
+            <div class="note" style="margin-top: 20px;">
+                📅 Актуально на октябрь 2024 г. | Все цены включают налог по НПД (6%)
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">🎯 Разработка под ключ</h3>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4 class="service-name">Десктоп/Mobile приложение</h4>
+                    <div class="service-stack">Flet / Python</div>
+                    <p class="service-desc">Кроссплатформенное решение под Windows, macOS, Android, iOS с кастомным UI/UX и интеграцией API.</p>
+                    <div class="service-meta">
+                        <span class="service-time">14-45 дней</span>
+                        <span class="service-price">от 70 000 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <h4 class="service-name">Игра/симулятор на Unity</h4>
+                    <div class="service-stack">C# / 3D Art</div>
+                    <p class="service-desc">Полный цикл: от прототипа до сборки. С возможностью интеграции кастомных 3D-моделей.</p>
+                    <div class="service-meta">
+                        <span class="service-time">21-60 дней</span>
+                        <span class="service-price">от 120 000 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <h4 class="service-name">Telegram-бот средней сложности</h4>
+                    <div class="service-stack">Python / aiogram / SQL</div>
+                    <p class="service-desc">Многоуровневое меню, БД, интеграция с API (платежи, ChatGPT), админ-панель.</p>
+                    <div class="service-meta">
+                        <span class="service-time">7-20 дней</span>
+                        <span class="service-price">от 25 000 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">🚀 3D Art & Автоматизация</h3>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4 class="service-name">3D-контент для Unity/игр</h4>
+                    <div class="service-stack">Blender / Substance</div>
+                    <p class="service-desc">Оптимизированные модели, PBR-текстуры, анимации. Готовность к импорту в движок.</p>
+                    <div class="service-meta">
+                        <span class="service-time">5-20 дней</span>
+                        <span class="service-price">от 10 000 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <h4 class="service-name">Автоматизация процессов</h4>
+                    <div class="service-stack">Python / Скрипты</div>
+                    <p class="service-desc">Парсинг, обработка данных, интеграция API, автоматизация рутины. Готовое EXE или сервис.</p>
+                    <div class="service-meta">
+                        <span class="service-time">3-10 дней</span>
+                        <span class="service-price">от 15 000 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <h4 class="service-name">Процедурная генерация контента</h4>
+                    <div class="service-stack">Python/C# для Unity/Blender</div>
+                    <p class="service-desc">Скрипты для генерации уникальных ландшафтов, уровней, предметов по параметрам.</p>
+                    <div class="service-meta">
+                        <span class="service-time">10-30 дней</span>
+                        <span class="service-price">от 40 000 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3 class="section-title">💡 Дополнительные услуги</h3>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4 class="service-name">Мини-игра для сайта или рекламы</h4>
+                    <div class="service-stack">WebGL / Flet / Unity</div>
+                    <p class="service-desc">Легковесная игра для вовлечения аудитории. Один игровой цикл, адаптивный дизайн.</p>
+                    <div class="service-meta">
+                        <span class="service-time">10-25 дней</span>
+                        <span class="service-price">от 50 000 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <h4 class="service-name">Визуализатор данных / Dashboard</h4>
+                    <div class="service-stack">Flet / Unity / Python</div>
+                    <p class="service-desc">Интерактивный интерфейс для отображения данных в виде графиков, диаграмм, 3D-объектов.</p>
+                    <div class="service-meta">
+                        <span class="service-time">10-30 дней</span>
+                        <span class="service-price">от 60 000 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <h4 class="service-name">Интеграция между сервисами</h4>
+                    <div class="service-stack">Python / API / Веб-хуки</div>
+                    <p class="service-desc">Связка разных сервисов (Trello, Telegram, CRM, Google Sheets) через кастомные скрипты.</p>
+                    <div class="service-meta">
+                        <span class="service-time">5-14 дней</span>
+                        <span class="service-price">от 20 000 ₽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="conditions">
+            <h3 class="conditions-title">✅ Условия сотрудничества</h3>
+            <div class="conditions-list">
+                <div class="condition-item">
+                    <span class="condition-icon">✓</span>
+                    <div>
+                        <strong>Этапная оплата</strong><br>
+                        Проекты >50к ₽: 30% / 40% / 30%
+                    </div>
+                </div>
+                
+                <div class="condition-item">
+                    <span class="condition-icon">✓</span>
+                    <div>
+                        <strong>Четкое ТЗ</strong><br>
+                        Бесплатная консультация, затем детальное техническое задание
+                    </div>
+                </div>
+                
+                <div class="condition-item">
+                    <span class="condition-icon">✓</span>
+                    <div>
+                        <strong>Гарантии</strong><br>
+                        Поддержка 14 дней после сдачи<br>
+                        Прозрачные сроки и отчеты
+                    </div>
+                </div>
+                
+                <div class="condition-item">
+                    <span class="condition-icon">✓</span>
+                    <div>
+                        <strong>Единый исполнитель</strong><br>
+                        Код, дизайн, 3D — всё из одних рук<br>
+                        Экономия на коммуникациях
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3 style="color: #f1f5f9; margin-bottom: 20px;">📞 Свяжитесь со мной для обсуждения проекта</h3>
+            
+            <div class="contacts">
+                <a href="https://t.me/YangvarrRS" class="contact-item" target="_blank">
+                    <span style="font-size: 1.2em;">✈️</span> Telegram: @YangvarrRS
+                </a>
+                
+                <a href="mailto:alnestsrt@gmail.com" class="contact-item">
+                    alnestsrt@gmail.com
+                </a>
+            </div>
+            
+            <p class="note" style="margin-top: 40px;">
+                💼 Работаю как самозанятый (НПД 6%). Все платежи защищены. Передаю исходный код и полные права на продукт.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Установка текущей даты
+            const now = new Date();
+            const options = { month: 'long', year: 'numeric' };
+            const dateString = now.toLocaleDateString('ru-RU', options);
+            document.querySelector('.note').innerHTML = `📅 Актуально на ${dateString} г. | Все цены включают налог по НПД (6%)`;
+            
+            // Анимация приветствия
+            setTimeout(() => {
+                const nameElement = document.querySelector('.name');
+                nameElement.style.animation = 'none';
+                setTimeout(() => {
+                    nameElement.style.animation = '';
+                }, 10);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
